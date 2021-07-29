@@ -12,7 +12,6 @@ const Page = () => {
     email: "Invalid E-mail",
     required: "This is required",
   };
-
   const history = useHistory();
 
   return (
@@ -20,10 +19,10 @@ const Page = () => {
       <Content>
         <Row>
           <Col span={24}>
-            <div className={s.login_page}>
+            <div className={s.forgot_password_page}>
               <Card>
-                <h1 className="mb-5">Login</h1>
-                <Form layout="vertical" initialValues={{ remember: true }}>
+                <h1 className="mb-5">Forgot Password</h1>
+                <Form layout="vertical">
                   <Form.Item
                     name="email"
                     label="Email"
@@ -31,27 +30,21 @@ const Page = () => {
                       { required: true, message: rules.required },
                       { type: "email", message: rules.email },
                     ]}
+                    className="mb-5"
                   >
                     <Input size="large" placeholder="Email Address" />
                   </Form.Item>
-                  <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{ required: true, message: rules.required }]}
-                    className="mb-5"
-                  >
-                    <Input.Password size="large" placeholder="Password" />
-                  </Form.Item>
+
                   <Form.Item>
                     <div className="d-flex justify-content-between">
                       <Button
                         type="link"
                         style={{ paddingLeft: 0 }}
                         onClick={() => {
-                          history.push("/forgot-password");
+                          history.push("/login");
                         }}
                       >
-                        Forgot your password?
+                        Rememeber your password? login
                       </Button>
                       <Button
                         type="primary"
@@ -59,7 +52,7 @@ const Page = () => {
                         size="large"
                         shape="round"
                       >
-                        Submit
+                        Send
                       </Button>
                     </div>
                   </Form.Item>
