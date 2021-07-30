@@ -16,7 +16,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "import"],
   rules: {
     "no-undef": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -29,5 +29,7 @@ module.exports = {
     semi: ["error", "always"],
     // disallow multiple empty lines
     "no-multiple-empty-lines": ["error"],
+
+    "import/order": ["error", {"newlines-between": "always"}],
   },
 };
