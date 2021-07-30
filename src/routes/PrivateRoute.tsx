@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
+
 import { AppLayout } from "../components";
 
 interface Props {

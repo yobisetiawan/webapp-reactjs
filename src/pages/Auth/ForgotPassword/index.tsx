@@ -1,13 +1,13 @@
 import React from "react";
 import { Form, Input, Button, Layout, Row, Col, Card } from "antd";
-
-const { Footer, Content } = Layout;
-
-import s from "./style.module.scss";
 import { useHistory } from "react-router-dom";
+
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
 
+import s from "./style.module.scss";
+
+const { Footer, Content } = Layout;
 const Page = () => {
   const history = useHistory();
 

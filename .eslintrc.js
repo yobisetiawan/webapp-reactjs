@@ -30,6 +30,6 @@ module.exports = {
     // disallow multiple empty lines
     "no-multiple-empty-lines": ["error"],
 
-    "import/order": ["error", {"newlines-between": "always"}],
+    "import/order": ["error", { "newlines-between": "always" }],
   },
 };
