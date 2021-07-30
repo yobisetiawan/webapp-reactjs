@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
@@ -16,6 +17,10 @@ const Routes = () => {
     {
       path: "/login",
       component: <Login />,
+    },
+    {
+      path: "/register",
+      component: <Register />,
     },
     {
       path: "/forgot-password",

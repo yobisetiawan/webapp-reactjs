@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Card, Col, Divider, Form, Input, Layout, Row } from "antd";
+import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
 import { useHistory } from "react-router-dom";
 
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
 
-import { LoginServices } from "./Service";
+import { RegisterServices } from "./Service";
 import s from "./style.module.scss";
 
 const { Footer, Content } = Layout;
@@ -20,12 +20,12 @@ const Page = () => {
           <Col span={24}>
             <div className={s.login_page}>
               <Card>
-                <h1 className="mb-5">Login</h1>
+                <h1 className="mb-5">Register</h1>
                 <Form
                   layout="vertical"
                   onFinish={(values) => {
                     window.console.log(values);
-                    LoginServices.loginProcess(() => {
+                    RegisterServices.registerProcess(() => {
                       history.push("/");
                     });
                   }}
@@ -44,21 +44,20 @@ const Page = () => {
                     label="Password"
                     name="password"
                     rules={[{ required: true, message: MSG.required }]}
+                  >
+                    <Input.Password size="large" placeholder="Password" />
+                  </Form.Item>
+                  <Form.Item
+                    label="Password Confimation"
+                    name="password_confirmation"
+                    rules={[{ required: true, message: MSG.required }]}
                     className="mb-5"
                   >
                     <Input.Password size="large" placeholder="Password" />
                   </Form.Item>
                   <Form.Item>
                     <div className="d-flex justify-content-between">
-                      <Button
-                        type="link"
-                        style={{ paddingLeft: 0 }}
-                        onClick={() => {
-                          history.push("/forgot-password");
-                        }}
-                      >
-                        Forgot your password?
-                      </Button>
+                      <span></span>
                       <Button
                         type="primary"
                         htmlType="submit"
@@ -66,17 +65,6 @@ const Page = () => {
                         shape="round"
                       >
                         Submit
-                      </Button>
-                    </div>
-                    <Divider className="mt-5">OR</Divider>
-                    <div className="text-center ">
-                      <Button
-                        type="link"
-                        onClick={() => {
-                          history.push("/register");
-                        }}
-                      >
-                        Create an Acoount
                       </Button>
                     </div>
                   </Form.Item>
