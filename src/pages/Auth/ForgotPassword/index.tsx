@@ -6,12 +6,9 @@ const { Footer, Content } = Layout;
 import s from "./style.module.scss";
 import { useHistory } from "react-router-dom";
 import { FooterPage } from "../../../components";
+import { MSG } from "../../../configs";
 
 const Page = () => {
-  const rules = {
-    email: "Invalid E-mail",
-    required: "This is required",
-  };
   const history = useHistory();
 
   return (
@@ -27,8 +24,8 @@ const Page = () => {
                     name="email"
                     label="Email"
                     rules={[
-                      { required: true, message: rules.required },
-                      { type: "email", message: rules.email },
+                      { required: true, message: MSG.required },
+                      { type: "email", message: MSG.email },
                     ]}
                     className="mb-5"
                   >

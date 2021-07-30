@@ -1,20 +1,44 @@
 import React, { useState } from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Dropdown } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  UnlockOutlined,
+  PoweroffOutlined,
 } from "@ant-design/icons";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
+import FooterPage from "../FooterPage";
+import Avatar from "antd/lib/avatar/avatar";
+import { useHistory } from "react-router-dom";
 interface Props {
   children: React.ReactNode;
 }
+
 const Component = ({ children }: Props) => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const history = useHistory();
+
+  const menu = (
+    <Menu>
+      <Menu.Item icon={<UserOutlined />}>Profile</Menu.Item>
+      <Menu.Item icon={<UnlockOutlined />}>Change Password</Menu.Item>
+      <Menu.Item
+        icon={<PoweroffOutlined />}
+        onClick={() => {
+          history.push("/login");
+        }}
+      >
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -49,22 +73,20 @@ const Component = ({ children }: Props) => {
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }}>
-          <Menu theme="dark" mode="horizontal">
-            {new Array(4).fill(null).map((_, index) => {
-              const key = index + 1;
-              return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-            })}
-          </Menu>
+          <div className="d-flex justify-content-between">
+            <div></div>
+            <div className="pe-3">
+              <Dropdown overlay={menu} trigger={["click"]}>
+                <a href="#" className="d-block">
+                  <Avatar size={32} icon={<UserOutlined />} />
+                </a>
+              </Dropdown>
+            </div>
+          </div>
         </Header>
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          {children}
-        </Content>
+        <Content>{children}</Content>
         <Footer style={{ textAlign: "center" }}>
-          WebApp ©2021 Created by Yobi Bina Setiawan
+          <FooterPage />
         </Footer>
       </Layout>
     </Layout>
