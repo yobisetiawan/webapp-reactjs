@@ -79,7 +79,13 @@ const Component = ({ children }: Props) => {
           )}
         </div>
         <Menu theme="dark" mode="inline">
-          <Menu.Item key="nv-1" icon={<HomeOutlined />}>
+          <Menu.Item
+            key="nv-1"
+            icon={<HomeOutlined />}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
             Dashboard
           </Menu.Item>
           <Menu.Item key="nv-2" icon={<DesktopOutlined />}>
