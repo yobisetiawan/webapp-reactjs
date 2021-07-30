@@ -28,9 +28,26 @@ const Component = ({ children }: Props) => {
 
   const menu = (
     <Menu>
-      <Menu.Item icon={<UserOutlined />}>Profile</Menu.Item>
-      <Menu.Item icon={<UnlockOutlined />}>Change Password</Menu.Item>
       <Menu.Item
+        key="m-1"
+        icon={<UserOutlined />}
+        onClick={() => {
+          history.push("/profile");
+        }}
+      >
+        Profile
+      </Menu.Item>
+      <Menu.Item
+        key="m-2"
+        icon={<UnlockOutlined />}
+        onClick={() => {
+          history.push("/change-password");
+        }}
+      >
+        Change Password
+      </Menu.Item>
+      <Menu.Item
+        key="m-3"
         icon={<PoweroffOutlined />}
         onClick={() => {
           history.push("/login");
@@ -62,15 +79,21 @@ const Component = ({ children }: Props) => {
           )}
         </div>
         <Menu theme="dark" mode="inline">
-          <Menu.Item icon={<HomeOutlined />}>Dashboard</Menu.Item>
-          <Menu.Item icon={<DesktopOutlined />}>Organization</Menu.Item>
-          <Menu.Item icon={<CalendarOutlined />}>Schedule</Menu.Item>
-          <SubMenu key="sub1" icon={<UserOutlined />} title="Campaign">
-            <Menu.Item key="3">Tom</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
+          <Menu.Item key="nv-1" icon={<HomeOutlined />}>
+            Dashboard
+          </Menu.Item>
+          <Menu.Item key="nv-2" icon={<DesktopOutlined />}>
+            Organization
+          </Menu.Item>
+          <Menu.Item key="nv-3" icon={<CalendarOutlined />}>
+            Schedule
+          </Menu.Item>
+          <SubMenu key="nv-4" icon={<UserOutlined />} title="Campaign">
+            <Menu.Item key="nv-4.1">Phone Call</Menu.Item>
+            <Menu.Item key="nv-4.2">SMS</Menu.Item>
+            <Menu.Item key="nv-4.3">Alex</Menu.Item>
           </SubMenu>
-          <Menu.Item key="9" icon={<WalletOutlined />}>
+          <Menu.Item key="nv-5" icon={<WalletOutlined />}>
             Billing
           </Menu.Item>
         </Menu>
