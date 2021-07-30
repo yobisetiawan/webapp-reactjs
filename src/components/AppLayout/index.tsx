@@ -93,7 +93,16 @@ const Component = ({ children }: Props) => {
             <Menu.Item key="nv-4.2">SMS</Menu.Item>
             <Menu.Item key="nv-4.3">Alex</Menu.Item>
           </SubMenu>
-          <Menu.Item key="nv-5" icon={<WalletOutlined />}>
+          <Menu.Item
+            key="nv-5"
+            icon={<UserOutlined />}
+            onClick={() => {
+              history.push("/users");
+            }}
+          >
+            Users
+          </Menu.Item>
+          <Menu.Item key="nv-6" icon={<WalletOutlined />}>
             Billing
           </Menu.Item>
         </Menu>

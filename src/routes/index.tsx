@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
 import Page404 from "../pages/Errors/Page404";
+import Users from "../pages/Users";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -34,6 +35,10 @@ const Routes = () => {
     {
       path: "/profile",
       component: <Profile />,
+    },
+    {
+      path: "/users",
+      component: <Users />,
     },
   ];
 
