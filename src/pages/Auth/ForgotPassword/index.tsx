@@ -4,11 +4,13 @@ import { useHistory } from "react-router-dom";
 
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
+import { DocumentTitle } from "../../../hooks";
 
 import s from "./style.module.scss";
 
 const { Footer, Content } = Layout;
 const Page = () => {
+  DocumentTitle("Forgot Password");
   const history = useHistory();
 
   return (

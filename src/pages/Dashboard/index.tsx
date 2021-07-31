@@ -1,3 +1,4 @@
+import { Button, Space } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,24 +16,22 @@ const Page = () => {
       <div className="pt-3">
         <p>This is Content page</p>
         <h1>{counter.value}</h1>
-
-        <button
-          aria-label="Increment value"
-          onClick={() => {
-            DashboardService.increment(dispatch);
-          }}
-        >
-          Increment
-        </button>
-
-        <button
-          aria-label="Decrement value"
-          onClick={() => {
-            DashboardService.decrement(dispatch);
-          }}
-        >
-          Decrement
-        </button>
+        <Space>
+          <Button
+            onClick={() => {
+              DashboardService.increment(dispatch);
+            }}
+          >
+            Increment
+          </Button>
+          <Button
+            onClick={() => {
+              DashboardService.decrement(dispatch);
+            }}
+          >
+            Decrement
+          </Button>
+        </Space>
       </div>
     </AppContent>
   );

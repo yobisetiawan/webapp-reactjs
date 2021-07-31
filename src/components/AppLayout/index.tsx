@@ -8,6 +8,7 @@ import {
   PoweroffOutlined,
   CalendarOutlined,
   WalletOutlined,
+  AlertOutlined
 } from "@ant-design/icons";
 import Avatar from "antd/lib/avatar/avatar";
 import { useHistory } from "react-router-dom";
@@ -36,20 +37,20 @@ const Component = ({ children }: Props) => {
   const menu = (
     <Menu
       onClick={({ key }) => {
-        if (key === "logout") {
+        if (key === "/logout") {
           LogoutService.run(dispatch, onLogout);
           return false;
         }
         history.push(key);
       }}
     >
-      <Menu.Item key="profile" icon={<UserOutlined />}>
+      <Menu.Item key="/profile" icon={<UserOutlined />}>
         Profile
       </Menu.Item>
-      <Menu.Item key="change-password" icon={<UnlockOutlined />}>
+      <Menu.Item key="/change-password" icon={<UnlockOutlined />}>
         Change Password
       </Menu.Item>
-      <Menu.Item key="logout" icon={<PoweroffOutlined />}>
+      <Menu.Item key="/logout" icon={<PoweroffOutlined />}>
         Logout
       </Menu.Item>
     </Menu>
@@ -85,20 +86,20 @@ const Component = ({ children }: Props) => {
           <Menu.Item key="/" icon={<HomeOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="organization" icon={<DesktopOutlined />}>
+          <Menu.Item key="/organization" icon={<DesktopOutlined />}>
             Organization
           </Menu.Item>
-          <Menu.Item key="schedule" icon={<CalendarOutlined />}>
+          <Menu.Item key="/schedule" icon={<CalendarOutlined />}>
             Schedule
           </Menu.Item>
-          <SubMenu key="nv-4" icon={<UserOutlined />} title="Campaign">
-            <Menu.Item key="campaign/phone-call">Phone Call</Menu.Item>
-            <Menu.Item key="campaign/sms">SMS</Menu.Item>
+          <SubMenu key="nv-4" icon={<AlertOutlined />} title="Campaign">
+            <Menu.Item key="/campaigns/phone">Phone Call</Menu.Item>
+            <Menu.Item key="/campaigns/sms">SMS</Menu.Item>
           </SubMenu>
-          <Menu.Item key="users" icon={<UserOutlined />}>
+          <Menu.Item key="/users" icon={<UserOutlined />}>
             Users
           </Menu.Item>
-          <Menu.Item key="billing" icon={<WalletOutlined />}>
+          <Menu.Item key="/billing" icon={<WalletOutlined />}>
             Billing
           </Menu.Item>
         </Menu>
