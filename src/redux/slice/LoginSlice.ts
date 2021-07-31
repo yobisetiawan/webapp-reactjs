@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface LoginState {
   loading: boolean;
-  success: boolean;
   error: any;
 }
 
 const initialState: LoginState = {
   loading: false,
-  success: false,
   error: {},
 };
 
@@ -21,7 +19,6 @@ export const counterSlice = createSlice({
     },
     loginSuccess: (state) => {
       state.loading = false;
-      state.success = true;
       state.error = {};
     },
     loginErorr: (state, action) => {

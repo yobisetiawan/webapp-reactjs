@@ -8,6 +8,7 @@ const token = () => {
 
 const api = {
   login: (data: any) => http.post("/auth/login", data),
+  register: (data: any) => http.post("/auth/register", data),
   logout: () => http.get("/auth/logout"),
   forgotPasword: (data: any) => http.post("/auth/forgot-password", data),
   getCurrentUSer: () =>

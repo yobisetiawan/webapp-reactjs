@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
+import { RootState } from "../../../redux/store";
 
 import { RegisterServices } from "./Service";
 import s from "./style.module.scss";
@@ -11,7 +13,13 @@ import s from "./style.module.scss";
 const { Footer, Content } = Layout;
 
 const Page = () => {
+  const register = useSelector((state: RootState) => state.register);
+
   const history = useHistory();
+  const dispatch = useDispatch();
+  const onSuccess = () => {
+    history.push("/");
+  };
 
   return (
     <Layout>
@@ -23,10 +31,12 @@ const Page = () => {
                 <h1 className="mb-5">Register</h1>
                 <Form
                   layout="vertical"
-                  onFinish={() => { 
-                    RegisterServices.registerProcess(() => {
-                      history.push("/");
-                    });
+                  onFinish={(values) => {
+                    RegisterServices.registerProcess(
+                      dispatch,
+                      values,
+                      onSuccess
+                    );
                   }}
                 >
                   <Form.Item
@@ -60,7 +70,10 @@ const Page = () => {
                     rules={[{ required: true, message: MSG.required }]}
                     className="mb-5"
                   >
-                    <Input.Password size="large" placeholder="Password Confirmation" />
+                    <Input.Password
+                      size="large"
+                      placeholder="Password Confirmation"
+                    />
                   </Form.Item>
                   <Form.Item>
                     <div className="d-flex justify-content-between">
@@ -70,6 +83,7 @@ const Page = () => {
                         htmlType="submit"
                         size="large"
                         shape="round"
+                        loading={register.loading}
                       >
                         Submit
                       </Button>

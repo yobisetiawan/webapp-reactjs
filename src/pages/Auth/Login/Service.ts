@@ -6,6 +6,7 @@ import {
   loginSuccess,
 } from "../../../redux/slice/LoginSlice";
 import { AppDispatch } from "../../../redux/store";
+import { getErr422 } from "../../../utils/helper";
 
 export const LoginServices = {
   loginProcess: (dispatch: AppDispatch, params: any, onSuccess: () => void) => {
@@ -19,9 +20,7 @@ export const LoginServices = {
         onSuccess();
       })
       .catch((err) => {
-        if (err && err.response.status == 422) {
-          dispatch(loginErorr(err.response.data.errors));
-        }
+        dispatch(loginErorr(getErr422(err)));
       });
   },
 };
