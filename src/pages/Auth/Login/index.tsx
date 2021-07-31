@@ -1,9 +1,22 @@
 import React from "react";
-import { Button, Card, Col, Divider, Form, Input, Layout, Row } from "antd";
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Layout,
+  Row,
+} from "antd";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
+import { RootState } from "../../../redux/store";
+import { getDefValue } from "../../../utils/helper";
 
 import { LoginServices } from "./Service";
 import s from "./style.module.scss";
@@ -11,7 +24,14 @@ import s from "./style.module.scss";
 const { Footer, Content } = Layout;
 
 const Page = () => {
+  const login = useSelector((state: RootState) => state.login);
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const msgErr = getDefValue(login.error, "error");
+  const onSuccess = () => {
+    history.push("/");
+  }; 
 
   return (
     <Layout>
@@ -21,13 +41,19 @@ const Page = () => {
             <div className={s.login_page}>
               <Card>
                 <h1 className="mb-5">Login</h1>
+                {msgErr !== "" && (
+                  <Alert
+                    message={msgErr}
+                    type="error"
+                    showIcon
+                    className="mb-3 py-3"
+                  />
+                )}
+
                 <Form
                   layout="vertical"
                   onFinish={(values) => {
-                    window.console.log(values);
-                    LoginServices.loginProcess(() => {
-                      history.push("/");
-                    });
+                    LoginServices.loginProcess(dispatch, values, onSuccess);
                   }}
                 >
                   <Form.Item
@@ -63,6 +89,7 @@ const Page = () => {
                         type="primary"
                         htmlType="submit"
                         size="large"
+                        loading={login.loading}
                         shape="round"
                       >
                         Submit

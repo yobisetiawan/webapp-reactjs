@@ -23,13 +23,20 @@ const Page = () => {
                 <h1 className="mb-5">Register</h1>
                 <Form
                   layout="vertical"
-                  onFinish={(values) => {
-                    window.console.log(values);
+                  onFinish={() => { 
                     RegisterServices.registerProcess(() => {
                       history.push("/");
                     });
                   }}
                 >
+                  <Form.Item
+                    name="name"
+                    label="Name"
+                    rules={[{ required: true, message: MSG.required }]}
+                  >
+                    <Input size="large" placeholder="Full Name" />
+                  </Form.Item>
+
                   <Form.Item
                     name="email"
                     label="Email"
