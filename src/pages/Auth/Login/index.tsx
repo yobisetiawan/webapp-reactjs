@@ -17,6 +17,7 @@ import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
 import { RootState } from "../../../redux/store";
 import { getDefValue } from "../../../utils/helper";
+import { DocumentTitle } from "../../../hooks";
 
 import { LoginServices } from "./Service";
 import s from "./style.module.scss";
@@ -24,6 +25,8 @@ import s from "./style.module.scss";
 const { Footer, Content } = Layout;
 
 const Page = () => {
+  DocumentTitle("Login");
+  
   const login = useSelector((state: RootState) => state.login);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,7 +34,7 @@ const Page = () => {
   const msgErr = getDefValue(login.error, "error");
   const onSuccess = () => {
     history.push("/");
-  }; 
+  };
 
   return (
     <Layout>
