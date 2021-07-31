@@ -31,7 +31,7 @@ const Page = () => {
                 >
                   <Form.Item
                     name="name"
-                    label="Name"
+                    label="Full Name"
                     rules={[{ required: true, message: MSG.required }]}
                   >
                     <Input size="large" placeholder="Full Name" />
@@ -55,12 +55,12 @@ const Page = () => {
                     <Input.Password size="large" placeholder="Password" />
                   </Form.Item>
                   <Form.Item
-                    label="Password Confimation"
+                    label="Password Confirmation"
                     name="password_confirmation"
                     rules={[{ required: true, message: MSG.required }]}
                     className="mb-5"
                   >
-                    <Input.Password size="large" placeholder="Password" />
+                    <Input.Password size="large" placeholder="Password Confirmation" />
                   </Form.Item>
                   <Form.Item>
                     <div className="d-flex justify-content-between">
