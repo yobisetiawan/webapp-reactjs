@@ -8,7 +8,7 @@ import {
   PoweroffOutlined,
   CalendarOutlined,
   WalletOutlined,
-  AlertOutlined
+  AlertOutlined,
 } from "@ant-design/icons";
 import Avatar from "antd/lib/avatar/avatar";
 import { useHistory } from "react-router-dom";
@@ -65,11 +65,11 @@ const Component = ({ children }: Props) => {
           setCollapsed(!collapsed);
         }}
       >
-        <div className="logo d-flex justify-content-center align-items-center">
+        <div className="yb-logo d-flex justify-content-center align-items-center">
           <img src={IMAGE.logo} alt="" style={{ height: "40px" }} />
           {!collapsed && (
             <span
-              className="c-white ms-2"
+              className="yb-c-white ms-2"
               style={{ fontSize: "14px", fontWeight: "bold" }}
             >
               Project Starter

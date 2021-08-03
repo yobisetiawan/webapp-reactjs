@@ -3,14 +3,13 @@ import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FooterPage } from "../../../components";
+import { FooterPage, Logo } from "../../../components";
 import { MSG } from "../../../configs";
 import { RootState } from "../../../redux/store";
 import { DocumentTitle } from "../../../hooks";
 import { getServerErr } from "../../../utils/helper";
 
 import { RegisterServices } from "./Service";
-import s from "./style.module.scss";
 
 const { Footer, Content } = Layout;
 
@@ -32,9 +31,9 @@ const Page = () => {
       <Content>
         <Row>
           <Col span={24}>
-            <div className={s.login_page}>
-              <Card>
-                <h1 className="mb-5">Register</h1>
+            <div className="yb-auth-page">
+              <Logo />
+              <Card className="yb-auth-form">
                 <Form
                   layout="vertical"
                   onFinish={(values) => {
@@ -52,7 +51,11 @@ const Page = () => {
                     help={_getServerErr("name")}
                     rules={[{ required: true, message: MSG.required }]}
                   >
-                    <Input size="large" placeholder="Full Name" />
+                    <Input
+                      size="large"
+                      placeholder="Full Name"
+                      className="yb-input"
+                    />
                   </Form.Item>
 
                   <Form.Item
@@ -65,7 +68,11 @@ const Page = () => {
                       { type: "email", message: MSG.email },
                     ]}
                   >
-                    <Input size="large" placeholder="Email Address" />
+                    <Input
+                      size="large"
+                      placeholder="Email Address"
+                      className="yb-input"
+                    />
                   </Form.Item>
                   <Form.Item
                     label="Password"
@@ -74,7 +81,11 @@ const Page = () => {
                     help={_getServerErr("password")}
                     rules={[{ required: true, message: MSG.required }]}
                   >
-                    <Input.Password size="large" placeholder="Password" />
+                    <Input.Password
+                      size="large"
+                      placeholder="Password"
+                      className="yb-input"
+                    />
                   </Form.Item>
                   <Form.Item
                     label="Password Confirmation"
@@ -86,24 +97,37 @@ const Page = () => {
                     <Input.Password
                       size="large"
                       placeholder="Password Confirmation"
+                      className="yb-input"
                     />
                   </Form.Item>
-                  <Form.Item>
+                  <Form.Item className="m-0">
                     <div className="d-flex justify-content-between">
                       <span></span>
                       <Button
                         type="primary"
                         htmlType="submit"
                         size="large"
-                        shape="round"
                         loading={register.loading}
+                        className="yb-w-100 yb-btn"
                       >
-                        Submit
+                        Register
                       </Button>
                     </div>
                   </Form.Item>
                 </Form>
               </Card>
+              <div className="text-center ">
+                <div>
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      history.push("/login");
+                    }}
+                  >
+                    Already have acount?
+                  </Button>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>

@@ -2,13 +2,12 @@ import React from "react";
 import { Form, Input, Button, Layout, Row, Col, Card } from "antd";
 import { useHistory } from "react-router-dom";
 
-import { FooterPage } from "../../../components";
+import { FooterPage, Logo } from "../../../components";
 import { MSG } from "../../../configs";
 import { DocumentTitle } from "../../../hooks";
 
-import s from "./style.module.scss";
-
 const { Footer, Content } = Layout;
+
 const Page = () => {
   DocumentTitle("Forgot Password");
   const history = useHistory();
@@ -18,9 +17,9 @@ const Page = () => {
       <Content>
         <Row>
           <Col span={24}>
-            <div className={s.forgot_password_page}>
-              <Card>
-                <h1 className="mb-5">Forgot Password</h1>
+            <div className="yb-auth-page">
+              <Logo />
+              <Card className="yb-auth-form">
                 <Form layout="vertical">
                   <Form.Item
                     name="email"
@@ -31,32 +30,37 @@ const Page = () => {
                     ]}
                     className="mb-5"
                   >
-                    <Input size="large" placeholder="Email Address" />
+                    <Input
+                      size="large"
+                      placeholder="Email Address"
+                      className="yb-input"
+                    />
                   </Form.Item>
 
-                  <Form.Item>
-                    <div className="d-flex justify-content-between">
-                      <Button
-                        type="link"
-                        style={{ paddingLeft: 0 }}
-                        onClick={() => {
-                          history.push("/login");
-                        }}
-                      >
-                        Rememeber your password? login
-                      </Button>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        size="large"
-                        shape="round"
-                      >
-                        Send
-                      </Button>
-                    </div>
+                  <Form.Item className="mb-0">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      size="large"
+                      className="yb-btn yb-w-100"
+                    >
+                      Send
+                    </Button>
                   </Form.Item>
                 </Form>
               </Card>
+
+              <div className="text-center">
+                <Button
+                  type="link"
+                  style={{ paddingLeft: 0 }}
+                  onClick={() => {
+                    history.push("/login");
+                  }}
+                >
+                  Rememeber your password?
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>
