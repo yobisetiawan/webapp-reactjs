@@ -1,14 +1,13 @@
 import React from "react";
+import Routes from "./routes";
 
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
-import Login from "./pages/Auth/Login";
-
 const App = () => {
   return (
     <div className="App">
-      <Login />
+      <Routes />
     </div>
   );
 };

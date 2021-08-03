@@ -1,12 +1,11 @@
 import React from "react";
-import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
+import { Form, Input, Button, Layout, Row, Col, Card } from "antd";
 
 const { Footer, Content } = Layout;
 
 import s from "./style.module.scss";
 import { useHistory } from "react-router-dom";
 import { FooterPage } from "../../../components";
-import { LoginServices } from "./Service";
 import { MSG } from "../../../configs";
 
 const Page = () => {
@@ -17,18 +16,10 @@ const Page = () => {
       <Content>
         <Row>
           <Col span={24}>
-            <div className={s.login_page}>
+            <div className={s.forgot_password_page}>
               <Card>
-                <h1 className="mb-5">Login</h1>
-                <Form
-                  layout="vertical"
-                  onFinish={(values) => {
-                    window.console.log(values);
-                    LoginServices.loginProcess(() => {
-                      history.push("/");
-                    });
-                  }}
-                >
+                <h1 className="mb-5">Forgot Password</h1>
+                <Form layout="vertical">
                   <Form.Item
                     name="email"
                     label="Email"
@@ -36,27 +27,21 @@ const Page = () => {
                       { required: true, message: MSG.required },
                       { type: "email", message: MSG.email },
                     ]}
+                    className="mb-5"
                   >
                     <Input size="large" placeholder="Email Address" />
                   </Form.Item>
-                  <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{ required: true, message: MSG.required }]}
-                    className="mb-5"
-                  >
-                    <Input.Password size="large" placeholder="Password" />
-                  </Form.Item>
+
                   <Form.Item>
                     <div className="d-flex justify-content-between">
                       <Button
                         type="link"
                         style={{ paddingLeft: 0 }}
                         onClick={() => {
-                          history.push("/forgot-password");
+                          history.push("/login");
                         }}
                       >
-                        Forgot your password?
+                        Rememeber your password? login
                       </Button>
                       <Button
                         type="primary"
@@ -64,7 +49,7 @@ const Page = () => {
                         size="large"
                         shape="round"
                       >
-                        Submit
+                        Send
                       </Button>
                     </div>
                   </Form.Item>
