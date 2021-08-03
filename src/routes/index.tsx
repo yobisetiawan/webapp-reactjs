@@ -4,7 +4,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/Dashboard";
+import Profile from "../pages/Profile";
+import ChangePassword from "../pages/ChangePassword";
 import Page404 from "../pages/Errors/Page404";
+import Users from "../pages/Users";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -24,6 +27,18 @@ const Routes = () => {
     {
       path: "/dashboard",
       component: <Dashboard />,
+    },
+    {
+      path: "/change-password",
+      component: <ChangePassword />,
+    },
+    {
+      path: "/profile",
+      component: <Profile />,
+    },
+    {
+      path: "/users",
+      component: <Users />,
     },
   ];
 

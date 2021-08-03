@@ -1,4 +1,5 @@
 import STORAGE from "./storage";
 import MSG from "./message";
+import IMAGE from "./image";
 
-export { STORAGE, MSG };
+export { IMAGE, STORAGE, MSG };

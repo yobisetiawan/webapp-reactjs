@@ -4,7 +4,7 @@ import { AppContent } from "../../components";
 
 const Page = () => {
   return (
-    <AppContent title="Dashboard">
+    <AppContent title="Profile">
       <div className="pt-3">
         <p>This is Content page</p>
       </div>
