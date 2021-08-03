@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-export const useIsFirstRenderHook = () => {
+export const FirstRender = () => {
   const isMountRef = useRef(true);
   useEffect(() => {
     isMountRef.current = false;

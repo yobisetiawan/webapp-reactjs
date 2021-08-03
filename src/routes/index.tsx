@@ -12,6 +12,8 @@ import Users from "../pages/Users";
 import Blling from "../pages/Blling";
 import Schedule from "../pages/Schedule";
 import Organization from "../pages/Organization";
+import Phone from "../pages/Campaigns/Phone";
+import Sms from "../pages/Campaigns/Sms";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -59,6 +61,14 @@ const Routes = () => {
     {
       path: "/organization",
       component: <Organization />,
+    },
+    {
+      path: "/campaigns/phone",
+      component: <Phone />,
+    },
+    {
+      path: "/campaigns/sms",
+      component: <Sms />,
     },
   ];
 

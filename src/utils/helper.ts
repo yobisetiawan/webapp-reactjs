@@ -11,3 +11,17 @@ export const getErr422 = (err: any) => {
   }
   return null;
 };
+
+export const getServerErr = (dt: any, field: string, status = false) => {
+  let res = undefined;
+  if (dt && dt[field]) {
+    res = dt[field];
+    if (Array.isArray(dt[field])) {
+      res = dt[field][0];
+    }
+  }
+  if (status) {
+    return res ? "error" : undefined;
+  }
+  return res;
+};
