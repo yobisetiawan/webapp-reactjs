@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 
-import { AppLayout } from "../components";
+import { AppLayout, GetCurrentUser } from "../components";
+import { RootState } from "../redux/store";
+import { getDefValue } from "../utils/helper";
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +13,11 @@ interface Props {
 }
 
 const PrivateRoute = ({ children, ...rest }: Props) => {
-  const isLogin = true;
+  const auth = useSelector((state: RootState) => state.auth);
+  const isLogin = auth.token && auth.user;
+  if (auth.token !== "" && getDefValue(auth.user, "email") === "") {
+    return <GetCurrentUser />;
+  }
   return (
     <Route
       {...rest}

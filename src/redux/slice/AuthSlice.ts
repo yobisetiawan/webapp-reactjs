@@ -1,23 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+import { STORAGE } from "../../configs";
+
+export interface AuthState {
+  user: any;
+  is_loading: boolean;
+  token: string;
+}
+
+export const initialState: AuthState = {
   user: {},
-  is_login: false,
+  token: localStorage.getItem(STORAGE.token) || "",
   is_loading: false,
 };
 
-const userSlice = createSlice({
+const Slice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
       state.is_loading = false;
-      state.is_login = true;
+    },
+    setToken: (state, action) => {
+      localStorage.setItem(STORAGE.token, action.payload);
+      state.is_loading = false;
+      state.token = action.payload;
+    },
+    setUserToken: (state, action) => {
+      localStorage.setItem(STORAGE.token, action.payload.token);
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.is_loading = false;
+    },
+    logout: (state) => {
+      localStorage.clear();
+      state.user = {};
+      state.token = "";
+      state.is_loading = false;
     },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setToken, setUserToken, logout } = Slice.actions;
 
-export default userSlice.reducer;
+export default Slice.reducer;

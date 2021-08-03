@@ -1,37 +1,25 @@
 import React from "react";
-import {
-  Alert,
-  Button,
-  Card,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Layout,
-  Row,
-} from "antd";
+import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FooterPage } from "../../../components";
 import { MSG } from "../../../configs";
 import { RootState } from "../../../redux/store";
-import { getDefValue } from "../../../utils/helper";
 
-import { LoginServices } from "./Service";
+import { RegisterServices } from "./Service";
 import s from "./style.module.scss";
 
 const { Footer, Content } = Layout;
 
 const Page = () => {
-  const login = useSelector((state: RootState) => state.login);
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const register = useSelector((state: RootState) => state.register);
 
-  const msgErr = getDefValue(login.error, "error");
+  const history = useHistory();
+  const dispatch = useDispatch();
   const onSuccess = () => {
     history.push("/");
-  }; 
+  };
 
   return (
     <Layout>
@@ -40,22 +28,25 @@ const Page = () => {
           <Col span={24}>
             <div className={s.login_page}>
               <Card>
-                <h1 className="mb-5">Login</h1>
-                {msgErr !== "" && (
-                  <Alert
-                    message={msgErr}
-                    type="error"
-                    showIcon
-                    className="mb-3 py-3"
-                  />
-                )}
-
+                <h1 className="mb-5">Register</h1>
                 <Form
                   layout="vertical"
                   onFinish={(values) => {
-                    LoginServices.loginProcess(dispatch, values, onSuccess);
+                    RegisterServices.registerProcess(
+                      dispatch,
+                      values,
+                      onSuccess
+                    );
                   }}
                 >
+                  <Form.Item
+                    name="name"
+                    label="Full Name"
+                    rules={[{ required: true, message: MSG.required }]}
+                  >
+                    <Input size="large" placeholder="Full Name" />
+                  </Form.Item>
+
                   <Form.Item
                     name="email"
                     label="Email"
@@ -70,40 +61,31 @@ const Page = () => {
                     label="Password"
                     name="password"
                     rules={[{ required: true, message: MSG.required }]}
-                    className="mb-5"
                   >
                     <Input.Password size="large" placeholder="Password" />
                   </Form.Item>
+                  <Form.Item
+                    label="Password Confirmation"
+                    name="password_confirmation"
+                    rules={[{ required: true, message: MSG.required }]}
+                    className="mb-5"
+                  >
+                    <Input.Password
+                      size="large"
+                      placeholder="Password Confirmation"
+                    />
+                  </Form.Item>
                   <Form.Item>
                     <div className="d-flex justify-content-between">
-                      <Button
-                        type="link"
-                        style={{ paddingLeft: 0 }}
-                        onClick={() => {
-                          history.push("/forgot-password");
-                        }}
-                      >
-                        Forgot your password?
-                      </Button>
+                      <span></span>
                       <Button
                         type="primary"
                         htmlType="submit"
                         size="large"
-                        loading={login.loading}
                         shape="round"
+                        loading={register.loading}
                       >
                         Submit
-                      </Button>
-                    </div>
-                    <Divider className="mt-5">OR</Divider>
-                    <div className="text-center ">
-                      <Button
-                        type="link"
-                        onClick={() => {
-                          history.push("/register");
-                        }}
-                      >
-                        Create an Acoount
                       </Button>
                     </div>
                   </Form.Item>

@@ -2,12 +2,16 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
 import Page404 from "../pages/Errors/Page404";
 import Users from "../pages/Users";
+import Blling from "../pages/Blling";
+import Schedule from "../pages/Schedule";
+import Organization from "../pages/Organization";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -16,6 +20,10 @@ const Routes = () => {
     {
       path: "/login",
       component: <Login />,
+    },
+    {
+      path: "/register",
+      component: <Register />,
     },
     {
       path: "/forgot-password",
@@ -39,6 +47,18 @@ const Routes = () => {
     {
       path: "/users",
       component: <Users />,
+    },
+    {
+      path: "/billing",
+      component: <Blling />,
+    },
+    {
+      path: "/schedule",
+      component: <Schedule />,
+    },
+    {
+      path: "/organization",
+      component: <Organization />,
     },
   ];
 

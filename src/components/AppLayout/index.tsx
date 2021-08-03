@@ -11,9 +11,12 @@ import {
 } from "@ant-design/icons";
 import Avatar from "antd/lib/avatar/avatar";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import FooterPage from "../FooterPage";
 import { IMAGE } from "../../configs";
+
+import { LogoutService } from "./Service";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -25,34 +28,28 @@ const Component = ({ children }: Props) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const history = useHistory();
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    history.push("/login");
+  };
 
   const menu = (
-    <Menu>
-      <Menu.Item
-        key="m-1"
-        icon={<UserOutlined />}
-        onClick={() => {
-          history.push("/profile");
-        }}
-      >
+    <Menu
+      onClick={({ key }) => {
+        if (key === "logout") {
+          LogoutService.run(dispatch, onLogout);
+          return false;
+        }
+        history.push(key);
+      }}
+    >
+      <Menu.Item key="profile" icon={<UserOutlined />}>
         Profile
       </Menu.Item>
-      <Menu.Item
-        key="m-2"
-        icon={<UnlockOutlined />}
-        onClick={() => {
-          history.push("/change-password");
-        }}
-      >
+      <Menu.Item key="change-password" icon={<UnlockOutlined />}>
         Change Password
       </Menu.Item>
-      <Menu.Item
-        key="m-3"
-        icon={<PoweroffOutlined />}
-        onClick={() => {
-          history.push("/login");
-        }}
-      >
+      <Menu.Item key="logout" icon={<PoweroffOutlined />}>
         Logout
       </Menu.Item>
     </Menu>
@@ -72,43 +69,36 @@ const Component = ({ children }: Props) => {
           {!collapsed && (
             <span
               className="c-white ms-2"
-              style={{ fontSize: "16px", fontWeight: "bold" }}
+              style={{ fontSize: "14px", fontWeight: "bold" }}
             >
-              Ant Design
+              Project Starter
             </span>
           )}
         </div>
-        <Menu theme="dark" mode="inline">
-          <Menu.Item
-            key="nv-1"
-            icon={<HomeOutlined />}
-            onClick={() => {
-              history.push("/");
-            }}
-          >
+        <Menu
+          theme="dark"
+          mode="inline"
+          onClick={({ key }) => {
+            history.push(key);
+          }}
+        >
+          <Menu.Item key="/" icon={<HomeOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="nv-2" icon={<DesktopOutlined />}>
+          <Menu.Item key="organization" icon={<DesktopOutlined />}>
             Organization
           </Menu.Item>
-          <Menu.Item key="nv-3" icon={<CalendarOutlined />}>
+          <Menu.Item key="schedule" icon={<CalendarOutlined />}>
             Schedule
           </Menu.Item>
           <SubMenu key="nv-4" icon={<UserOutlined />} title="Campaign">
-            <Menu.Item key="nv-4.1">Phone Call</Menu.Item>
-            <Menu.Item key="nv-4.2">SMS</Menu.Item>
-            <Menu.Item key="nv-4.3">Alex</Menu.Item>
+            <Menu.Item key="campaign/phone-call">Phone Call</Menu.Item>
+            <Menu.Item key="campaign/sms">SMS</Menu.Item>
           </SubMenu>
-          <Menu.Item
-            key="nv-5"
-            icon={<UserOutlined />}
-            onClick={() => {
-              history.push("/users");
-            }}
-          >
+          <Menu.Item key="users" icon={<UserOutlined />}>
             Users
           </Menu.Item>
-          <Menu.Item key="nv-6" icon={<WalletOutlined />}>
+          <Menu.Item key="billing" icon={<WalletOutlined />}>
             Billing
           </Menu.Item>
         </Menu>

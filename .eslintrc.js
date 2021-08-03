@@ -31,5 +31,6 @@ module.exports = {
     "no-multiple-empty-lines": ["error"],
 
     "import/order": ["error", { "newlines-between": "always" }],
+    "@typescript-eslint/no-explicit-any": "off",
   },
 };
