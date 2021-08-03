@@ -1,0 +1,13 @@
+@import "./colors";
+
+body {
+  min-height: 100vh;
+  background-color: $c1;
+}
+
+.App,
+.ant-layout {
+  min-height: 100vh;
+}
+
+@import "bootstrap/dist/css/bootstrap-utilities.css";
