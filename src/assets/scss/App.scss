@@ -1,0 +1,22 @@
+@import "./colors";
+
+body {
+  min-height: 100vh;
+  background-color: $c1;
+}
+
+.App,
+.ant-layout {
+  min-height: 100vh;
+}
+
+@import "bootstrap/dist/css/bootstrap-utilities.css";
+
+.logo {
+  height: 45px;
+  margin: 10px 5px 5px 5px;
+}
+
+.c-white {
+  color: $c-white;
+}
