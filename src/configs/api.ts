@@ -2,7 +2,7 @@ import { http } from "../utils/http";
 
 import { STORAGE } from ".";
 
-const token = () => {
+const BearerToken = () => {
   return `Bearer ${localStorage.getItem(STORAGE.token)}`;
 };
 
@@ -11,8 +11,10 @@ const api = {
   register: (data: any) => http.post("/auth/register", data),
   logout: () => http.get("/auth/logout"),
   forgotPasword: (data: any) => http.post("/auth/forgot-password", data),
+  resetPasword: (token: string, data: any) =>
+    http.post("/auth/reset-password/" + token, data),
   getCurrentUSer: () =>
-    http.get("/current-user", { headers: { Authorization: token() } }),
+    http.get("/current-user", { headers: { Authorization: BearerToken() } }),
 };
 
 export default api;
