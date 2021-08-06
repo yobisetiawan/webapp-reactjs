@@ -2,7 +2,7 @@ import { http } from "../utils/http";
 
 import { STORAGE } from ".";
 
-const BearerToken = () => {
+export const BearerToken = () => {
   return `Bearer ${localStorage.getItem(STORAGE.token)}`;
 };
 
@@ -15,6 +15,18 @@ const api = {
     http.post("/auth/reset-password/" + token, data),
   getCurrentUSer: () =>
     http.get("/current-user", { headers: { Authorization: BearerToken() } }),
+  changePassword: (data: any) =>
+    http.put("/current-user/change-password", data, {
+      headers: { Authorization: BearerToken() },
+    }),
+  changeProfile: (data: any) =>
+    http.put("/current-user/change-profile", data, {
+      headers: { Authorization: BearerToken() },
+    }),
+  changeAvatar: (data: any) =>
+    http.put("/current-user/change-avatar?_method=PUT", data, {
+      headers: { Authorization: BearerToken() },
+    }),
 };
 
 export default api;

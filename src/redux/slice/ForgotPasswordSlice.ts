@@ -10,7 +10,7 @@ const initialState: ForgotPasswordState = {
   error: {},
 };
 
-export const counterSlice = createSlice({
+export const Slice = createSlice({
   name: "forgot_password",
   initialState,
   reducers: {
@@ -29,7 +29,6 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { forgotPending, forgotSuccess, forgotErorr } =
-  counterSlice.actions;
+export const { forgotPending, forgotSuccess, forgotErorr } = Slice.actions;
 
-export default counterSlice.reducer;
+export default Slice.reducer;

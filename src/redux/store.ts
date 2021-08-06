@@ -6,6 +6,9 @@ import AuthSlice from "./slice/AuthSlice";
 import RegisterSlice from "./slice/RegisterSlice";
 import ForgotPasswordSlice from "./slice/ForgotPasswordSlice";
 import ResetPasswordSlice from "./slice/ResetPasswordSlice";
+import ChangePasswordSlice from "./slice/ChangePasswordSlice";
+import ChangeProfileSlice from "./slice/ChangeProfileSlice";
+import ChangeAvatarSlice from "./slice/ChangeAvatarSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +18,9 @@ export const store = configureStore({
     register: RegisterSlice,
     forgotPassword: ForgotPasswordSlice,
     resetPassword: ResetPasswordSlice,
+    changePassword: ChangePasswordSlice,
+    changeAvatar: ChangeAvatarSlice,
+    changeProfile: ChangeProfileSlice,
   },
 });
 

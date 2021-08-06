@@ -10,7 +10,7 @@ const initialState: RegisterState = {
   error: {},
 };
 
-export const counterSlice = createSlice({
+export const Slice = createSlice({
   name: "register",
   initialState,
   reducers: {
@@ -30,6 +30,6 @@ export const counterSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { registerPending, registerSuccess, registerErorr } =
-  counterSlice.actions;
+  Slice.actions;
 
-export default counterSlice.reducer;
+export default Slice.reducer;
