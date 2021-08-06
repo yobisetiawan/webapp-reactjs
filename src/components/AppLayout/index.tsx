@@ -82,6 +82,8 @@ const Component = ({ children }: Props) => {
           onClick={({ key }) => {
             history.push(key);
           }}
+          defaultSelectedKeys={["/"]}
+          selectedKeys={[location.pathname]}
         >
           <Menu.Item key="/" icon={<HomeOutlined />}>
             Dashboard
