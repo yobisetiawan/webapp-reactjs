@@ -10,6 +10,11 @@ import {
   changeProfilePending,
   changeProfileSuccess,
 } from "../../../redux/slice/ChangeProfileSlice";
+import {
+  ResendVerifyEmailErorr,
+  ResendVerifyEmailPending,
+  ResendVerifyEmailSuccess,
+} from "../../../redux/slice/ResendVerifyEmailSlice";
 import { AppDispatch } from "../../../redux/store";
 import { getErr422 } from "../../../utils/helper";
 
@@ -18,8 +23,8 @@ export const ChangeProfileServices = {
     dispatch(changeProfilePending());
     API.changeProfile(params)
       .then((ress) => {
+        dispatch(setUser(ress.data.data));
         dispatch(changeProfileSuccess());
-        dispatch(setUser(ress.data));
         onSuccess();
       })
       .catch((err) => {
@@ -28,13 +33,27 @@ export const ChangeProfileServices = {
   },
   avatar: (dispatch: AppDispatch, params: any, onSuccess: () => void) => {
     dispatch(changeAvatarPending());
-    API.changeAvatar(params)
-      .then(() => {
+    const formDt = new FormData();
+    formDt.append("file", params[0]);
+    API.changeAvatar(formDt)
+      .then((ress) => {
+        dispatch(setUser(ress.data.data));
         dispatch(changeAvatarSuccess());
         onSuccess();
       })
       .catch((err) => {
         dispatch(changeAvatarErorr(getErr422(err)));
+      });
+  },
+  resendVerifyEmail: (dispatch: AppDispatch, onSuccess: () => void) => {
+    dispatch(ResendVerifyEmailPending());
+    API.resendVerifyEmail()
+      .then(() => {
+        dispatch(ResendVerifyEmailSuccess());
+        onSuccess();
+      })
+      .catch((err) => {
+        dispatch(ResendVerifyEmailErorr(getErr422(err)));
       });
   },
 };

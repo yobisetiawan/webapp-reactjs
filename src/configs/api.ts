@@ -13,6 +13,14 @@ const api = {
   forgotPasword: (data: any) => http.post("/auth/forgot-password", data),
   resetPasword: (token: string, data: any) =>
     http.post("/auth/reset-password/" + token, data),
+  resendVerifyEmail: () =>
+    http.post(
+      "/auth/resend-verify-email",
+      {},
+      {
+        headers: { Authorization: BearerToken() },
+      }
+    ),
   getCurrentUSer: () =>
     http.get("/current-user", { headers: { Authorization: BearerToken() } }),
   changePassword: (data: any) =>
@@ -24,8 +32,11 @@ const api = {
       headers: { Authorization: BearerToken() },
     }),
   changeAvatar: (data: any) =>
-    http.put("/current-user/change-avatar?_method=PUT", data, {
-      headers: { Authorization: BearerToken() },
+    http.post("/current-user/change-avatar?_method=PUT", data, {
+      headers: {
+        Authorization: BearerToken(),
+        "Content-Type": "multipart/form-data",
+      },
     }),
 };
 

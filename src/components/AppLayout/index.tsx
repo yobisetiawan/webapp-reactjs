@@ -10,12 +10,12 @@ import {
   WalletOutlined,
   AlertOutlined,
 } from "@ant-design/icons";
-import Avatar from "antd/lib/avatar/avatar";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import FooterPage from "../FooterPage";
 import { IMAGE } from "../../configs";
+import UserAvatar from "../UserAvatar";
 
 import { LogoutService } from "./Service";
 
@@ -113,7 +113,7 @@ const Component = ({ children }: Props) => {
             <div className="pe-3">
               <Dropdown overlay={menu} trigger={["click"]}>
                 <a href="#" className="d-block">
-                  <Avatar size={32} icon={<UserOutlined />} />
+                  <UserAvatar size={32} />
                 </a>
               </Dropdown>
             </div>
