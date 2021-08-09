@@ -1,11 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Form, Input, message } from "antd";
+import { CameraOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  Alert,
+  Avatar,
+  Button,
+  Form,
+  Input,
+  message,
+  Space,
+  Tooltip,
+} from "antd";
 
 import { AppContent } from "../../../components";
 import { RootState } from "../../../redux/store";
-import { getServerErr } from "../../../utils/helper";
+import { getDefValue, getServerErr } from "../../../utils/helper";
 import { MSG } from "../../../configs";
 
 import { ChangeProfileServices } from "./Service";
@@ -22,9 +31,28 @@ const Page = () => {
     message.success("Profile was saved!");
   };
 
+  const verified = getDefValue(auth.user, "email_verified_at") !== "";
+
   return (
     <AppContent title="Profile">
       <div className="pt-3">
+        {!verified && (
+          <Alert
+            message="Warning"
+            description="Please verify your email."
+            type="warning"
+            showIcon
+            className="mb-5"
+            action={
+              <Space>
+                <Button size="small" danger>
+                  Resend Email
+                </Button>
+              </Space>
+            }
+          />
+        )}
+
         <Form
           labelCol={{ sm: { span: 24 }, lg: { span: 24 }, xl: { span: 4 } }}
           wrapperCol={{ sm: { span: 24 }, lg: { span: 24 }, xl: { span: 5 } }}
@@ -37,7 +65,16 @@ const Page = () => {
           }}
         >
           <Form.Item wrapperCol={{ xl: { offset: 4 } }}>
-            <Avatar size={64} icon={<UserOutlined />} />
+            <div style={{ position: "relative", display: "inline-block" }}>
+              <Avatar size={64} icon={<UserOutlined />} />
+              <div
+                style={{ position: "absolute", top: "-10px", right: "-10px" }}
+              >
+                <Tooltip title="Edit">
+                  <Button shape="circle" icon={<CameraOutlined />} />
+                </Tooltip>
+              </div>
+            </div>
           </Form.Item>
 
           <Form.Item

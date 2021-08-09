@@ -1,4 +1,5 @@
 import { API } from "../../../configs";
+import { setUser } from "../../../redux/slice/AuthSlice";
 import {
   changeAvatarErorr,
   changeAvatarPending,
@@ -16,8 +17,9 @@ export const ChangeProfileServices = {
   profile: (dispatch: AppDispatch, params: any, onSuccess: () => void) => {
     dispatch(changeProfilePending());
     API.changeProfile(params)
-      .then(() => {
+      .then((ress) => {
         dispatch(changeProfileSuccess());
+        dispatch(setUser(ress.data));
         onSuccess();
       })
       .catch((err) => {
