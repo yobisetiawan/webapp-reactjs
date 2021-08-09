@@ -3,14 +3,24 @@ import { configureStore } from "@reduxjs/toolkit";
 import CounterSlice from "./slice/CounterSlice";
 import LoginSlice from "./slice/LoginSlice";
 import AuthSlice from "./slice/AuthSlice";
-import RegisterSlice from './slice/RegisterSlice';
+import RegisterSlice from "./slice/RegisterSlice";
+import ForgotPasswordSlice from "./slice/ForgotPasswordSlice";
+import ResetPasswordSlice from "./slice/ResetPasswordSlice";
+import ChangePasswordSlice from "./slice/ChangePasswordSlice";
+import ChangeProfileSlice from "./slice/ChangeProfileSlice";
+import ChangeAvatarSlice from "./slice/ChangeAvatarSlice";
 
 export const store = configureStore({
   reducer: {
     auth: AuthSlice,
     counter: CounterSlice,
     login: LoginSlice,
-    register: RegisterSlice
+    register: RegisterSlice,
+    forgotPassword: ForgotPasswordSlice,
+    resetPassword: ResetPasswordSlice,
+    changePassword: ChangePasswordSlice,
+    changeAvatar: ChangeAvatarSlice,
+    changeProfile: ChangeProfileSlice,
   },
 });
 

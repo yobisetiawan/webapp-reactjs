@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface LoginState {
+export interface ChangePasswordState {
   loading: boolean;
   error: any;
 }
 
-const initialState: LoginState = {
+const initialState: ChangePasswordState = {
   loading: false,
   error: {},
 };
 
 export const Slice = createSlice({
-  name: "login",
+  name: "change_password",
   initialState,
   reducers: {
-    loginPending: (state) => {
+    changePassPending: (state) => {
       state.loading = true;
     },
-    loginSuccess: (state) => {
+    changePassSuccess: (state) => {
       state.loading = false;
       state.error = {};
     },
-    loginErorr: (state, action) => {
+    changePassErorr: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -29,6 +29,7 @@ export const Slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { loginPending, loginSuccess, loginErorr } = Slice.actions;
+export const { changePassPending, changePassSuccess, changePassErorr } =
+  Slice.actions;
 
 export default Slice.reducer;

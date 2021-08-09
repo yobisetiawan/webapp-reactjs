@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Layout, Row, Col, Card, message } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FooterPage, Logo } from "../../../components";
@@ -9,26 +9,29 @@ import { DocumentTitle } from "../../../hooks";
 import { RootState } from "../../../redux/store";
 import { getServerErr } from "../../../utils/helper";
 
-import { ForogtPasswordServices } from "./Service";
+import { ResetPasswordServices } from "./Service";
 
 const { Footer, Content } = Layout;
 
 const Page = () => {
   DocumentTitle("Forgot Password");
   const [form] = Form.useForm();
-  const forgotPassword = useSelector(
-    (state: RootState) => state.forgotPassword
-  );
+  const resetPassword = useSelector((state: RootState) => state.resetPassword);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const { token } = useParams<{ token?: string }>();
+
   const onSuccess = () => {
-    message.success("Email has sent!");
+    message.success("New Password Saved!");
     form.resetFields();
+    setTimeout(() => {
+      history.push("/login");
+    }, 400);
   };
 
   const _getServerErr = (field: string, status = false) =>
-    getServerErr(forgotPassword.error, field, status);
+    getServerErr(resetPassword.error, field, status);
 
   return (
     <Layout>
@@ -42,23 +45,38 @@ const Page = () => {
                   form={form}
                   layout="vertical"
                   onFinish={(values) => {
-                    ForogtPasswordServices.run(dispatch, values, onSuccess);
+                    const gToken = token || "";
+                    ResetPasswordServices.run(
+                      dispatch,
+                      gToken,
+                      values,
+                      onSuccess
+                    );
                   }}
                 >
                   <Form.Item
-                    name="email"
-                    label="Email"
-                    rules={[
-                      { required: true, message: MSG.required },
-                      { type: "email", message: MSG.email },
-                    ]}
-                    validateStatus={_getServerErr("email", true)}
-                    help={_getServerErr("email")}
+                    label="New Password"
+                    name="password"
+                    validateStatus={_getServerErr("password", true)}
+                    help={_getServerErr("password")}
+                    rules={[{ required: true, message: MSG.required }]}
+                  >
+                    <Input.Password
+                      size="large"
+                      placeholder="Password"
+                      className="yb-input"
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Password Confirmation"
+                    name="password_confirmation"
+                    help={_getServerErr("password_confirmation")}
+                    rules={[{ required: true, message: MSG.required }]}
                     className="mb-5"
                   >
-                    <Input
+                    <Input.Password
                       size="large"
-                      placeholder="Email Address"
+                      placeholder="Password Confirmation"
                       className="yb-input"
                     />
                   </Form.Item>
@@ -68,26 +86,14 @@ const Page = () => {
                       type="primary"
                       htmlType="submit"
                       size="large"
-                      loading={forgotPassword.loading}
+                      loading={resetPassword.loading}
                       className="yb-btn yb-w-100"
                     >
-                      Send
+                      Save
                     </Button>
                   </Form.Item>
                 </Form>
               </Card>
-
-              <div className="text-center">
-                <Button
-                  type="link"
-                  style={{ paddingLeft: 0 }}
-                  onClick={() => {
-                    history.push("/login");
-                  }}
-                >
-                  Rememeber your password?
-                </Button>
-              </div>
             </div>
           </Col>
         </Row>
