@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CameraOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  CameraOutlined,
+  LoadingOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import {
   Alert,
   Avatar,
@@ -9,6 +13,7 @@ import {
   Input,
   message,
   Space,
+  Spin,
   Tooltip,
 } from "antd";
 
@@ -20,9 +25,17 @@ import { MSG } from "../../../configs";
 import { ChangeProfileServices } from "./Service";
 
 const Page = () => {
+  const fileIput = useRef<HTMLInputElement>(null);
+
+  const [successResend, setSuccessResend] = useState(false);
+
   const dispatch = useDispatch();
   const auth = useSelector((state: RootState) => state.auth);
   const changeProfile = useSelector((state: RootState) => state.changeProfile);
+  const changeAvatar = useSelector((state: RootState) => state.changeAvatar);
+  const resendVerifyEmail = useSelector(
+    (state: RootState) => state.resendVerifyEmail
+  );
 
   const _getServerErr = (field: string, status = false) =>
     getServerErr(changeProfile.error, field, status);
@@ -31,12 +44,19 @@ const Page = () => {
     message.success("Profile was saved!");
   };
 
+  const onSuccessResend = () => {
+    message.success("Email has sent!");
+    setSuccessResend(true);
+  };
+
   const verified = getDefValue(auth.user, "email_verified_at") !== "";
+
+  const avatar = getDefValue(auth.user?.avatar, "url");
 
   return (
     <AppContent title="Profile">
       <div className="pt-3">
-        {!verified && (
+        {!verified && !successResend && (
           <Alert
             message="Warning"
             description="Please verify your email."
@@ -45,7 +65,17 @@ const Page = () => {
             className="mb-5"
             action={
               <Space>
-                <Button size="small" danger>
+                <Button
+                  size="small"
+                  danger
+                  loading={resendVerifyEmail.loading}
+                  onClick={() => {
+                    ChangeProfileServices.resendVerifyEmail(
+                      dispatch,
+                      onSuccessResend
+                    );
+                  }}
+                >
                   Resend Email
                 </Button>
               </Space>
@@ -66,12 +96,56 @@ const Page = () => {
         >
           <Form.Item wrapperCol={{ xl: { offset: 4 } }}>
             <div style={{ position: "relative", display: "inline-block" }}>
-              <Avatar size={64} icon={<UserOutlined />} />
+              {avatar === "" ? (
+                <Avatar size={64} icon={<UserOutlined />} />
+              ) : (
+                <Avatar
+                  size={64}
+                  src={
+                    avatar +
+                    "?updated_at=" +
+                    getDefValue(auth.user?.avatar, "updated_at")
+                  }
+                />
+              )}
               <div
                 style={{ position: "absolute", top: "-10px", right: "-10px" }}
               >
+                <div className="d-none">
+                  <input
+                    type="file"
+                    ref={fileIput}
+                    onChange={(e) => {
+                      ChangeProfileServices.avatar(
+                        dispatch,
+                        e.target.files,
+                        onSuccess
+                      );
+                    }}
+                    accept="image/*"
+                    onClick={(e: any) => {
+                      e.target.value = null;
+                    }}
+                  />
+                </div>
                 <Tooltip title="Edit">
-                  <Button shape="circle" icon={<CameraOutlined />} />
+                  <Button
+                    shape="circle"
+                    icon={
+                      changeAvatar.loading ? (
+                        <Spin
+                          indicator={
+                            <LoadingOutlined style={{ fontSize: 16 }} spin />
+                          }
+                        />
+                      ) : (
+                        <CameraOutlined />
+                      )
+                    }
+                    onClick={() => {
+                      fileIput?.current?.click();
+                    }}
+                  />
                 </Tooltip>
               </div>
             </div>
