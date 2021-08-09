@@ -1,12 +1,19 @@
+import { Calendar } from "antd";
 import React from "react";
 
 import { AppContent } from "../../components";
+
+import { dateCellRender, monthCellRender } from "./Calendar";
 
 const Page = () => {
   return (
     <AppContent title="Schedule">
       <div className="pt-3">
-        <p>This is Content page</p>
+        <Calendar
+          dateCellRender={dateCellRender}
+          monthCellRender={monthCellRender}
+        />
+        ,
       </div>
     </AppContent>
   );

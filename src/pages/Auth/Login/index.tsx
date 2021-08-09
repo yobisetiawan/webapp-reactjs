@@ -1,32 +1,21 @@
 import React from "react";
-import {
-  Alert,
-  Button,
-  Card,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Layout,
-  Row,
-} from "antd";
+import { Alert, Button, Card, Col, Form, Input, Layout, Row } from "antd";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FooterPage } from "../../../components";
+import { FooterPage, Logo } from "../../../components";
 import { MSG } from "../../../configs";
 import { RootState } from "../../../redux/store";
 import { getDefValue } from "../../../utils/helper";
 import { DocumentTitle } from "../../../hooks";
 
 import { LoginServices } from "./Service";
-import s from "./style.module.scss";
 
 const { Footer, Content } = Layout;
 
 const Page = () => {
   DocumentTitle("Login");
-  
+
   const login = useSelector((state: RootState) => state.login);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,9 +30,9 @@ const Page = () => {
       <Content>
         <Row>
           <Col span={24}>
-            <div className={s.login_page}>
-              <Card>
-                <h1 className="mb-5">Login</h1>
+            <div className="yb-auth-page">
+              <Logo />
+              <Card className="yb-auth-form">
                 {msgErr !== "" && (
                   <Alert
                     message={msgErr}
@@ -67,7 +56,11 @@ const Page = () => {
                       { type: "email", message: MSG.email },
                     ]}
                   >
-                    <Input size="large" placeholder="Email Address" />
+                    <Input
+                      size="large"
+                      placeholder="Email Address"
+                      className="yb-input"
+                    />
                   </Form.Item>
                   <Form.Item
                     label="Password"
@@ -75,43 +68,48 @@ const Page = () => {
                     rules={[{ required: true, message: MSG.required }]}
                     className="mb-5"
                   >
-                    <Input.Password size="large" placeholder="Password" />
+                    <Input.Password
+                      size="large"
+                      placeholder="Password"
+                      className="yb-input"
+                    />
                   </Form.Item>
-                  <Form.Item>
-                    <div className="d-flex justify-content-between">
-                      <Button
-                        type="link"
-                        style={{ paddingLeft: 0 }}
-                        onClick={() => {
-                          history.push("/forgot-password");
-                        }}
-                      >
-                        Forgot your password?
-                      </Button>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        size="large"
-                        loading={login.loading}
-                        shape="round"
-                      >
-                        Submit
-                      </Button>
-                    </div>
-                    <Divider className="mt-5">OR</Divider>
-                    <div className="text-center ">
-                      <Button
-                        type="link"
-                        onClick={() => {
-                          history.push("/register");
-                        }}
-                      >
-                        Create an Acoount
-                      </Button>
-                    </div>
+                  <Form.Item className="mb-0">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      size="large"
+                      loading={login.loading}
+                      className="yb-w-100 yb-btn"
+                    >
+                      Login
+                    </Button>
                   </Form.Item>
                 </Form>
               </Card>
+
+              <div className="text-center ">
+                <div>
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      history.push("/forgot-password");
+                    }}
+                  >
+                    Forgot your password?
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    type="link"
+                    onClick={() => {
+                      history.push("/register");
+                    }}
+                  >
+                    Create an Acoount
+                  </Button>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>

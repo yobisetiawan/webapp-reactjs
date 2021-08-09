@@ -12,15 +12,16 @@ interface Props {
 
 const Component = ({ children, title }: Props) => {
   DocumentTitle(title);
-  
+
   return (
     <div className={s.AppContent}>
       <div className="p-3">
         <Card>
           <div className="inner-content">
             <h1>{title}</h1>
+            <hr />
+            {children}
           </div>
-          {children}
         </Card>
       </div>
     </div>

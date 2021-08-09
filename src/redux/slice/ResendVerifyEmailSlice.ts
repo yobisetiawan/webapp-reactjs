@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface LoginState {
+export interface ResendVerifyEmailState {
   loading: boolean;
   error: any;
 }
 
-const initialState: LoginState = {
+const initialState: ResendVerifyEmailState = {
   loading: false,
   error: {},
 };
 
 export const Slice = createSlice({
-  name: "login",
+  name: "resend_verify_email",
   initialState,
   reducers: {
-    loginPending: (state) => {
+    ResendVerifyEmailPending: (state) => {
       state.loading = true;
     },
-    loginSuccess: (state) => {
+    ResendVerifyEmailSuccess: (state) => {
       state.loading = false;
       state.error = {};
     },
-    loginErorr: (state, action) => {
+    ResendVerifyEmailErorr: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -29,6 +29,10 @@ export const Slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { loginPending, loginSuccess, loginErorr } = Slice.actions;
+export const {
+  ResendVerifyEmailPending,
+  ResendVerifyEmailSuccess,
+  ResendVerifyEmailErorr,
+} = Slice.actions;
 
 export default Slice.reducer;

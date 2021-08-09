@@ -6,7 +6,7 @@ export const GetCurrentUserService = {
   run: (dispatch: AppDispatch) => {
     API.getCurrentUSer()
       .then((ress) => {
-        dispatch(setUser(ress.data));
+        dispatch(setUser(ress.data.data));
       })
       .catch(() => {
         dispatch(logout());

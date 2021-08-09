@@ -8,14 +8,14 @@ import {
   PoweroffOutlined,
   CalendarOutlined,
   WalletOutlined,
-  AlertOutlined
+  AlertOutlined,
 } from "@ant-design/icons";
-import Avatar from "antd/lib/avatar/avatar";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import FooterPage from "../FooterPage";
 import { IMAGE } from "../../configs";
+import UserAvatar from "../UserAvatar";
 
 import { LogoutService } from "./Service";
 
@@ -65,11 +65,11 @@ const Component = ({ children }: Props) => {
           setCollapsed(!collapsed);
         }}
       >
-        <div className="logo d-flex justify-content-center align-items-center">
+        <div className="yb-logo d-flex justify-content-center align-items-center">
           <img src={IMAGE.logo} alt="" style={{ height: "40px" }} />
           {!collapsed && (
             <span
-              className="c-white ms-2"
+              className="yb-c-white ms-2"
               style={{ fontSize: "14px", fontWeight: "bold" }}
             >
               Project Starter
@@ -82,6 +82,8 @@ const Component = ({ children }: Props) => {
           onClick={({ key }) => {
             history.push(key);
           }}
+          defaultSelectedKeys={["/"]}
+          selectedKeys={[location.pathname]}
         >
           <Menu.Item key="/" icon={<HomeOutlined />}>
             Dashboard
@@ -111,7 +113,7 @@ const Component = ({ children }: Props) => {
             <div className="pe-3">
               <Dropdown overlay={menu} trigger={["click"]}>
                 <a href="#" className="d-block">
-                  <Avatar size={32} icon={<UserOutlined />} />
+                  <UserAvatar size={32} />
                 </a>
               </Dropdown>
             </div>

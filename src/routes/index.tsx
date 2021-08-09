@@ -5,8 +5,9 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/Dashboard";
-import Profile from "../pages/Profile";
-import ChangePassword from "../pages/ChangePassword";
+import Profile from "../pages/User/Profile";
+import ChangePassword from "../pages/User/ChangePassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
 import Page404 from "../pages/Errors/Page404";
 import Users from "../pages/Users";
 import Blling from "../pages/Blling";
@@ -30,6 +31,10 @@ const Routes = () => {
     {
       path: "/forgot-password",
       component: <ForgotPassword />,
+    },
+    {
+      path: "/reset-password/:token",
+      component: <ResetPassword />,
     },
   ];
 
