@@ -1,4 +1,4 @@
-demo url https://yb-reactjs-project-starter.herokuapp.com/
+Demo url https://yb-reactjs-project-starter.herokuapp.com/
 
 # Getting Started with Create React App
 
