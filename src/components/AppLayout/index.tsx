@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Layout, Menu, Dropdown } from "antd";
 import {
-  DesktopOutlined,
   HomeOutlined,
   UserOutlined,
   UnlockOutlined,
   PoweroffOutlined,
-  CalendarOutlined,
   WalletOutlined,
   AlertOutlined,
 } from "@ant-design/icons";
@@ -88,22 +86,17 @@ const Component = ({ children }: Props) => {
           <Menu.Item key="/" icon={<HomeOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="/organization" icon={<DesktopOutlined />}>
-            Organization
-          </Menu.Item>
-          <Menu.Item key="/schedule" icon={<CalendarOutlined />}>
-            Schedule
-          </Menu.Item>
-          <SubMenu key="nv-4" icon={<AlertOutlined />} title="Campaign">
-            <Menu.Item key="/campaigns/phone">Phone Call</Menu.Item>
-            <Menu.Item key="/campaigns/sms">SMS</Menu.Item>
-          </SubMenu>
+
           <Menu.Item key="/users" icon={<UserOutlined />}>
             Users
           </Menu.Item>
           <Menu.Item key="/billing" icon={<WalletOutlined />}>
             Billing
           </Menu.Item>
+          <SubMenu key="nv-4" icon={<AlertOutlined />} title="Sub Menu">
+            <Menu.Item key="/campaigns/phone">Sub Menu 01</Menu.Item>
+            <Menu.Item key="/campaigns/sms">Sub Menu 02</Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
       <Layout className="site-layout">
