@@ -10,6 +10,7 @@ import ChangePasswordSlice from "./slice/ChangePasswordSlice";
 import ChangeProfileSlice from "./slice/ChangeProfileSlice";
 import ChangeAvatarSlice from "./slice/ChangeAvatarSlice";
 import ResendVerifyEmailSlice from "./slice/ResendVerifyEmailSlice";
+import UserListSlice from "./slice/UserListSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     changeAvatar: ChangeAvatarSlice,
     changeProfile: ChangeProfileSlice,
     resendVerifyEmail: ResendVerifyEmailSlice,
+    userList: UserListSlice,
   },
 });
 

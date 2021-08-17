@@ -38,6 +38,8 @@ const api = {
         "Content-Type": "multipart/form-data",
       },
     }),
+  getUserList: () =>
+    http.get("/users", { headers: { Authorization: BearerToken() } }),
 };
 
 export default api;

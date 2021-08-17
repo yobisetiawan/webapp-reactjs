@@ -1,5 +1,5 @@
 const env = {
-  host: "http://nova.local/api/v1",
+  host: process.env.REACT_APP_HOST_API,
 };
   
 export default env;
